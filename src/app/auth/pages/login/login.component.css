@@ -1,0 +1,75 @@
+.login-div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main-login-img{
+    width: 10%;
+    height: auto;
+    margin-top: 5rem;
+}
+
+.quote-text{
+    display: flex;
+    font-weight: bold;
+    color: #03597B;
+    font-size: 18px;
+    font-family: "EB Garamond", serif;
+}
+.login-btn-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 50%;
+    margin-top: 3rem;
+}
+.google-btn{
+    padding: 10px 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    border: 1px solid #DEDEDE;
+    background-color: transparent;
+    border-radius: 50px;
+    gap: 1rem;
+    cursor: pointer;
+}
+.google-btn:hover{
+    background-color: #DEDEDE;
+}
+.g-icon{
+    width: 1.5rem;
+    height: auto;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    
+    .main-login-img{
+        width: 40%;
+    }
+    
+    .login-btn-div{
+        height: 5rem;
+        width: 90%;
+        margin-top: 5rem;
+    }
+    .g-icon{
+        width: 1rem;
+        height: auto;
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}

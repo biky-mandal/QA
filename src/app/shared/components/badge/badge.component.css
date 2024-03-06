@@ -1,0 +1,21 @@
+.badge{
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #000000;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e2e2e234;
+}
+.warn{
+    background-color: #f1d11e34;
+    color: #b9a012;
+    border-radius: 8px;
+}
+
+.success{
+    background-color: #86e9af34;
+    color: #249352;
+    border-radius: 8px;
+}

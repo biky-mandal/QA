@@ -1,0 +1,32 @@
+.main-content{
+    width: 100%;
+    height: calc(100vh - 5rem);
+}
+.sidebar{
+    background: #fff;
+    width: 8rem;
+}
+.content{
+    background: #fff;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .main-content{
+        height: calc(100vh - 3.5rem);
+    }
+    .sidebar{
+        width: 15rem;
+    }
+}    
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .main-content{
+        height: calc(100vh - 5rem);
+    }
+    .sidebar{
+        width: 8rem;
+    }
+}

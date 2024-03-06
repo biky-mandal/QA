@@ -1,0 +1,44 @@
+<div [ngClass]="secondHeaderRoutes.includes(router.url) ? 'header-main-div': 'header-main-div'">
+
+    <div class="h-l-div c-div">
+        <button class="menu-btn" (click)="handleSidebar()">
+            <span class="material-symbols-outlined">
+                menu
+            </span>
+        </button>
+
+        <img class="logo" src="/assets/images/logo.png" alt="QA" />
+
+        <div class="dashboard-header" *ngIf="secondHeaderRoutes.includes(router.url)">
+            <button class="home-btn" (click)="redirects('/')">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            </button>
+    
+            <span class="dashboard-title">Profile</span>
+        </div>
+
+    </div>
+
+    <!-- medium routes: Normal View -->
+    <div class="h-m-div c-div" *ngIf="!secondHeaderRoutes.includes(router.url)">
+        <ul class="navs">
+            <li><a class="nav-link" href="/dashboard">Dashboard</a></li>
+            <li><a class="nav-link" href="/about">About</a></li>
+            <li><a class="nav-link" href="/contact">Contact</a></li>
+        </ul>
+    </div>
+
+
+
+    <div class="h-r-div c-div">
+        <app-button *ngIf="!isLoggedIn" (onClick)="redirects('/auth/login')" type="primary" color="" title="Login"></app-button>
+
+        <app-button *ngIf="isLoggedIn && !secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/profile')" type="primary" color="" title="Profile"></app-button>
+
+        <app-button *ngIf="isLoggedIn && secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/live')" type="secondary" color="warn" title="Live"></app-button>
+
+        <app-button *ngIf="isLoggedIn && secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/practice')"  type="primary" color="" title="Practice"></app-button>
+    </div>
+</div>

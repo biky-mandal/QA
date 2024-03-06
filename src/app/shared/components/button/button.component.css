@@ -1,0 +1,42 @@
+.secondary{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 1.5rem;
+    border-radius: 50px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 1.5rem;
+    border-radius: 50px;
+    background-color: #F0D11C;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.red{
+    border: 1px solid #f36b6b;
+    color: #c72323;
+}
+.warn{
+    border: 1px solid #dbdbdb;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 820px) {
+    .secondary{
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    .primary {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+}
