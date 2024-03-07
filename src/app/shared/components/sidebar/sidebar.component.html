@@ -1,5 +1,13 @@
 <mat-drawer-container class="example-container" hasBackdrop="false">
-    <mat-drawer class="sidebar" #drawer mode="over" [opened]="openNav">I'm a drawer</mat-drawer>
+    <mat-drawer class="sidebar" #drawer mode="over" [opened]="openNav">
+
+        <div class="sidenav-div">
+            <ng-container *ngFor="let item of navItems">
+                <app-nav-item [navItem]="item"></app-nav-item>
+            </ng-container>
+        </div>
+
+    </mat-drawer>
     <mat-drawer-content class="content">
         <div class="main-content">
             <router-outlet></router-outlet>

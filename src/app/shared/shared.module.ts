@@ -11,7 +11,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { ButtonComponent } from './components/button/button.component';
 
-
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { FeatureCardComponent } from './components/feature-card/feature-card.component';
+import { NavItemComponent } from './components/nav-item/nav-item.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +25,22 @@ import { ButtonComponent } from './components/button/button.component';
     ContactComponent,
     ProfileComponent,
     BadgeComponent,
-    ButtonComponent
+    ButtonComponent,
+    LoginComponent,
+    FeatureCardComponent,
+    NavItemComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    provideAuth(() => getAuth())
   ],
   exports: [
-    ButtonComponent
+    ButtonComponent, NavItemComponent
+  ],
+  providers: [
+    AuthGuard
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,10 @@
+<button class="nav" *ngIf="isLoggedIn === navItem.guard || !navItem.guard" (click)="redirectsTo(navItem.title, navItem.route)">
+    <div class="nav-icon">
+        <span [ngClass]="navItem.title === 'Logout' ? 'material-symbols-outlined red' : 'material-symbols-outlined'">
+            {{navItem.icon}}
+        </span>
+    </div>
+    <div [ngClass]="navItem.title === 'Logout' ? 'nav-title red' : 'nav-title'">
+        {{navItem.title}}
+    </div>
+</button>

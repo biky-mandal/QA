@@ -1,20 +1,20 @@
 <div class="profile-div">
     <div class="profile-left-part">
-        <img class="profile-pic" src="../../../../assets/images/logo.png" alt="profile-pic"/>
+        <img class="profile-pic" src={{user.photoURL}} alt="{{user.name}}"/>
 
         <div class="logout-btn">
-            <app-button type="secondary" color="red" title="Logout"></app-button>
+            <app-button type="secondary" (onClick)="logouthandler()" color="red" title="Logout"></app-button>
         </div>
     </div>
 
     <div class="profile-right-part">
         <div class="name-div">
-            <label class="name">BIKY MANDAL</label>
-            <app-badge type="warn" title="Author"></app-badge>
+            <label class="name">{{user.name}}</label>
+            <app-badge type="warn" title="{{user.type}}"></app-badge>
         </div>
 
         <div class="desc-div">
-            <label class="desc">You are an author. You can contribute to the community.</label>
+            <label class="desc" *ngIf="user.type === 'author'">You are an author. You can contribute to the community.</label>
         </div>
 
         <div class="info-div">
@@ -22,8 +22,9 @@
                 <span class="info-lbl">Email</span>
 
                 <div class="email-info">
-                    <span class="info-value">m.biky50@gmail.com</span>
-                    <app-badge type="success" title="Verified"></app-badge>
+                    <span class="info-value">{{user.email}}</span>
+                    <app-badge *ngIf="user.email_verified" type="success" title="Verified"></app-badge>
+                    <app-badge *ngIf="!user.email_verified" type="warn" title="Not Verified"></app-badge>
                 </div>
             </div>
         </div>
@@ -31,7 +32,12 @@
 
         <div class="user-type-div">
             <span class="user-type">Be an Author?</span>
-            <mat-slide-toggle>Slide me!</mat-slide-toggle>
+            <mat-slide-toggle [checked]="isAuthor" (change)="updateUserType($event)"></mat-slide-toggle>
+        </div>
+
+        <div class="user-type-div" *ngIf="isAuthor">
+            <span class="user-type">To contribute please visit <a href="/author/create-question">author's dashboard</a></span>
+            
         </div>
     </div>
 </div>

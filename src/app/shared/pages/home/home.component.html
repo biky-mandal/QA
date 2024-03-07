@@ -1,0 +1,32 @@
+<div class="home">
+    <div class="landing-div">
+        <label class="text1 text">Be ready, be prepare</label>
+        <label class="text2 text">For Every Student From Anywhere</label>
+        <label class="text3 text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.</label>
+
+        <div class="landing-btn">
+            <app-button type="primary" color="" title="GO IN"></app-button>
+        </div>
+    </div>
+    <div class="landing-pg-content">
+        <ng-container *ngFor="let data of fcardData">
+            <app-feature-card [data]="data"></app-feature-card>
+        </ng-container>
+    </div>
+
+    <div class="landing-author-content">
+        <div class="author-content">
+            <div class="left-wrap">
+                <img class="author-img" src="/assets/images/author.png" alt="author"/>
+                <div class="author-wrap-content">
+                    <span class="text author-title">Want to be an author?</span>
+                    <label class="text author-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</label>
+                </div>
+            </div>
+            <div class="right-wrap">
+                <app-button type="primary" color="" title="Update"></app-button>
+            </div>
+        </div>
+    </div>
+</div>
