@@ -9,6 +9,8 @@
 
         <img class="logo" src="/assets/images/logo.png" alt="QA" />
 
+
+
         <div class="dashboard-header" *ngIf="secondHeaderRoutes.includes(router.url)">
             <button class="home-btn" (click)="redirects('/')">
                 <span class="material-symbols-outlined">
@@ -16,7 +18,12 @@
                 </span>
             </button>
     
-            <span class="dashboard-title">Profile</span>
+            <!-- Profile Header -->
+            <span class="dashboard-title" *ngIf="router.url === '/profile'">Profile</span>
+            <span class="dashboard-title" *ngIf="router.url === '/author/create-question'">Create Question</span>
+            <span class="dashboard-title" *ngIf="router.url === '/author/my-questions'">My Questions</span>
+            <span class="dashboard-title" *ngIf="router.url === '/author/dashboard'">Dashboard</span>
+            <span class="dashboard-title" *ngIf="router.url === '/author/categories'">Categories</span>
         </div>
 
     </div>

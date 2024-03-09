@@ -12,7 +12,14 @@ export class HeaderComponent implements OnInit {
   isOpen: boolean = false;
   @Output() open: EventEmitter<boolean> = new EventEmitter()
   isLoggedIn: boolean = false;
-  secondHeaderRoutes: Array<string> = ['/profile']
+  secondHeaderRoutes: Array<string> = [
+    '/profile', 
+    '/author/create-question',
+    '/author/dashboard',
+    '/author/my-questions',
+    '/author/create-question',
+    '/author/categories'
+  ]
   profileURL: any = '';
 
   constructor(

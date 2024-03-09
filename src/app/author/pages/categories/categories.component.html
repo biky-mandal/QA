@@ -1,0 +1,46 @@
+<div class="category-main-div">
+    <div class="category-left-tree">
+
+        <mat-tree class="tree-main" [dataSource]="dataSource" [treeControl]="treeControl">
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node class="tree-node-left-part sub-node" *matTreeNodeDef="let node" matTreeNodeToggle>
+                <!-- use a disabled button to provide padding for tree leaf -->
+                <button class="node-btn" mat-icon-button disabled></button>
+                {{node.name}}
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node class="tree-node" *matTreeNodeDef="let node;when: hasChild">
+                <div class="tree-node-left-part">
+                    <button class="node-btn" mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.name">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                    </button>
+                    {{node.name}}
+                </div>
+
+                <div class="tree-node-right-part">
+                    <button class="node-btn" mat-icon-button (click)="openDialog('SCAT', node)">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                            add
+                        </mat-icon>
+                    </button>
+                </div>
+
+            </mat-tree-node>
+        </mat-tree>
+
+    </div>
+
+    <div class="category-right-div">
+        <div class="head">
+            <span class="add-title">Add Category</span>
+            <button class="add-c-btn" (click)="openDialog('CAT', null)">
+                <mat-icon class="mat-icon-rtl-mirror">
+                    add
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

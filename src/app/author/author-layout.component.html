@@ -1,0 +1,12 @@
+<div class="author-div">
+    <div class="author-left-part">
+        <div class="nav-items">
+            <ng-container *ngFor="let item of navItems">
+                <app-nav-item [position]="position" [navItem]="item"></app-nav-item>
+            </ng-container>
+        </div>
+    </div>
+    <div class="author-right-part">
+        <router-outlet></router-outlet>
+    </div>
+</div>

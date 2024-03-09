@@ -1,0 +1,35 @@
+<div class="category-main-div" *ngIf="data.type === 'CAT'">
+    <div class="c-head">
+        <span class="c-head-lbl">Add Category</span>
+    </div>
+    <div class="c-body">
+        <mat-form-field class="input-cat" appearance="outline">
+            <mat-label>Category Name</mat-label>
+            <input matInput placeholder="Category" [(ngModel)]="value">
+        </mat-form-field>
+    </div>
+    <div class="c-footer">
+        <app-button (onClick)="onNoClick()" type="secondary" color="warn" title="Cancel"></app-button>
+        <app-button (onClick)="create()" type="primary" color="" title="Create"></app-button>
+    </div>
+</div>
+
+
+
+<div class="category-main-div" *ngIf="data.type === 'SCAT'">
+    <div class="c-head">
+        <span class="c-head-lbl">Add Sub Category</span>
+    </div>
+    <div class="c-body">
+        <mat-form-field class="input-cat" appearance="outline">
+            <mat-label>Sub Category Name</mat-label>
+            <input matInput placeholder="Sub Category" [(ngModel)]="value">
+        </mat-form-field>
+
+        <label>Note: Subcategory will be added under `{{data.node.name}}` category</label>
+    </div>
+    <div class="c-footer">
+        <app-button (onClick)="onNoClick()" type="secondary" color="warn" title="Cancel"></app-button>
+        <app-button (onClick)="create()" type="primary" color="" title="Create"></app-button>
+    </div>
+</div>

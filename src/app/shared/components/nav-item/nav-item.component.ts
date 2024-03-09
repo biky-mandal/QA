@@ -10,10 +10,12 @@ import { AuthService } from '../../services/auth.service';
 export class NavItemComponent implements OnInit {
 
   @Input() navItem: any = {};
+  @Input() position: 'SIDE' | 'BOTTOM' = 'SIDE';
+
   isLoggedIn: boolean = false;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private authService: AuthService
   ) { }
 

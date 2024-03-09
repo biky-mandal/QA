@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -34,6 +35,7 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
     CommonModule,
     SharedRoutingModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     provideAuth(() => getAuth())
   ],
   exports: [

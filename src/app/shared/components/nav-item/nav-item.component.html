@@ -1,10 +1,26 @@
-<button class="nav" *ngIf="isLoggedIn === navItem.guard || !navItem.guard" (click)="redirectsTo(navItem.title, navItem.route)">
-    <div class="nav-icon">
-        <span [ngClass]="navItem.title === 'Logout' ? 'material-symbols-outlined red' : 'material-symbols-outlined'">
-            {{navItem.icon}}
-        </span>
-    </div>
-    <div [ngClass]="navItem.title === 'Logout' ? 'nav-title red' : 'nav-title'">
-        {{navItem.title}}
-    </div>
-</button>
+<ng-container *ngIf="position === 'SIDE'">
+    <button [ngClass]="router.url === navItem.route ? 'nav active': 'nav'" *ngIf="isLoggedIn === navItem.guard || !navItem.guard" (click)="redirectsTo(navItem.title, navItem.route)">
+        <div class="nav-icon">
+            <span [ngClass]="navItem.title === 'Logout' ? 'material-symbols-outlined red' : 'material-symbols-outlined'">
+                {{navItem.icon}}
+            </span>
+        </div>
+        <div [ngClass]="navItem.title === 'Logout' ? 'nav-title red' : 'nav-title'">
+            {{navItem.title}}
+        </div>
+    </button>
+</ng-container>
+
+
+<ng-container *ngIf="position === 'BOTTOM'">
+    <button [ngClass]="router.url === navItem.route ? 'bnav bactive': 'bnav'" *ngIf="isLoggedIn === navItem.guard || !navItem.guard" (click)="redirectsTo(navItem.title, navItem.route)">
+        <div class="bnav-icon">
+            <span [ngClass]="navItem.title === 'Logout' ? 'material-symbols-outlined bred' : 'material-symbols-outlined'">
+                {{navItem.icon}}
+            </span>
+        </div>
+        <div [ngClass]="navItem.title === 'Logout' ? 'bnav-title bred' : 'bnav-title'">
+            {{navItem.title}}
+        </div>
+    </button>
+</ng-container>
