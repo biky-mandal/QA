@@ -2,7 +2,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { CreateCategoryDialogComponent } from '../../components/create-category-dialog/create-category-dialog.component';
+import { CreateCategoryDialogComponent } from '../create-category-dialog/create-category-dialog.component';
 import { Firestore, collection, collectionData, doc, docData, updateDoc, CollectionReference, query, where, QuerySnapshot } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 

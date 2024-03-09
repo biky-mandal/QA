@@ -8,7 +8,7 @@ import { AuthorLayoutComponent } from './author-layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { MyQuestionsComponent } from './pages/my-questions/my-questions.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
-import { CreateCategoryDialogComponent } from './components/create-category-dialog/create-category-dialog.component';
+import { CreateCategoryDialogComponent } from './pages/create-category-dialog/create-category-dialog.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
