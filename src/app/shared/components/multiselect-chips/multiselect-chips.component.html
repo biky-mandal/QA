@@ -1,0 +1,21 @@
+<mat-form-field class="example-chip-list" appearance="outline">
+    <mat-label>{{title}}</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Fruit selection">
+        <ng-container *ngFor="let d of data;">
+            <mat-chip-row (removed)="remove(d)">
+                {{d}}
+                <button matChipRemove [attr.aria-label]="'remove ' + d">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+        </ng-container>
+
+    </mat-chip-grid>
+    <input placeholder="{{placeholder}}" #dataInput [formControl]="dataCtrl" [matChipInputFor]="chipGrid"
+        [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <ng-container *ngFor="let data of filteredData | async;">
+            <mat-option [value]="data">{{data}}</mat-option>
+        </ng-container>
+    </mat-autocomplete>
+</mat-form-field>

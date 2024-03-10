@@ -17,6 +17,12 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { FeatureCardComponent } from './components/feature-card/feature-card.component';
 import { NavItemComponent } from './components/nav-item/nav-item.component';
+import { MultiselectChipsComponent } from './components/multiselect-chips/multiselect-chips.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -29,17 +35,23 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
     ButtonComponent,
     LoginComponent,
     FeatureCardComponent,
-    NavItemComponent
+    NavItemComponent,
+    MultiselectChipsComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule,
     provideAuth(() => getAuth())
   ],
   exports: [
-    ButtonComponent, NavItemComponent
+    ButtonComponent, NavItemComponent, MultiselectChipsComponent
   ],
   providers: [
     AuthGuard

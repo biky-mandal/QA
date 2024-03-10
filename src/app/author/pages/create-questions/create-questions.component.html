@@ -1,36 +1,157 @@
 <div class="create-q-main-div">
-    <mat-form-field class="input-question" appearance="outline">
-        <mat-label>Question</mat-label>
-        <textarea matInput placeholder="Enter Question"></textarea>
-    </mat-form-field>
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
 
-    <div class="option-div optionAB">
-        <div class="opt optionA">
-            <mat-form-field class="input-option">
-                <mat-label>Option A</mat-label>
-                <input matInput placeholder="Enter Question">
-            </mat-form-field>
-        </div>
-        <div class="opt optionB">
-            <mat-form-field class="input-option">
-                <mat-label>Option B</mat-label>
-                <input matInput placeholder="Enter Question">
-            </mat-form-field>
-        </div>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Question description</ng-template>
 
-    </div>
-    <div class="option-div optionCD">
-        <div class="opt optionC">
-            <mat-form-field class="input-option">
-                <mat-label>Option C</mat-label>
-                <input matInput placeholder="Enter Question">
-            </mat-form-field>
-        </div>
-        <div class="opt optionD">
-            <mat-form-field class="input-option">
-                <mat-label>Option D</mat-label>
-                <input matInput placeholder="Enter Question">
-            </mat-form-field>
-        </div>
-    </div>
+                <div class="first-section">
+                    <mat-form-field class="input-question" appearance="outline">
+                        <mat-label>Question</mat-label>
+                        <textarea matInput placeholder="Enter Question" maxlength="250" formControlName="question"
+                            required></textarea>
+                    </mat-form-field>
+
+                    <div class="option-div optionAB">
+                        <div class="opt optionA">
+                            <mat-form-field class="input-option">
+                                <mat-label>Option A</mat-label>
+                                <input matInput placeholder="Enter Option A" formControlName="A" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="opt optionB">
+                            <mat-form-field class="input-option">
+                                <mat-label>Option B</mat-label>
+                                <input matInput placeholder="Enter Option B" formControlName="B" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="option-div optionCD">
+                        <div class="opt optionC">
+                            <mat-form-field class="input-option">
+                                <mat-label>Option C</mat-label>
+                                <input matInput placeholder="Enter Option C" formControlName="C" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="opt optionD">
+                            <mat-form-field class="input-option">
+                                <mat-label>Option D</mat-label>
+                                <input matInput placeholder="Enter Option D" formControlName="D" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="options-btn">
+                        <span>Correct Option</span>
+                        <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
+                            formControlName="correctOption" required>
+                            <mat-button-toggle value="A">A</mat-button-toggle>
+                            <mat-button-toggle value="B">B</mat-button-toggle>
+                            <mat-button-toggle value="C">C</mat-button-toggle>
+                            <mat-button-toggle value="D">D</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+
+                    <mat-form-field class="input-question" appearance="outline">
+                        <mat-label>Answer Explanation</mat-label>
+                        <textarea matInput placeholder="Enter Answer Brief" maxlength="150"
+                            formControlName="answerDesc" required></textarea>
+                    </mat-form-field>
+
+                    <div class="buttons-div">
+                        <button (click)="FirstFormDone()" class="next btn" mat-button matStepperNext>Next</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-step>
+
+
+
+
+
+        <mat-step>
+            <ng-template matStepLabel>Categories based on the question</ng-template>
+
+            <div class="multiselect-box">
+                <div class="multiselect">
+                    <app-multiselect-chips *ngIf="categoriesName.length > 0" [allInputData]="categoriesName"
+                        (selectedData)="getSelectedCategories($event)" title="Categories"
+                        placeholder="Select Categories"></app-multiselect-chips>
+                </div>
+
+                <div class="multiselect">
+                    <app-multiselect-chips *ngIf="subCategoriesName.length > 0" [allInputData]="subCategoriesName"
+                        (selectedData)="getSelectedSubCategories($event)" title="Sub Category"
+                        placeholder="Select Sub Categories"></app-multiselect-chips>
+                </div>
+            </div>
+
+
+            <div class="buttons-div">
+                <button class="back btn" mat-button matStepperPrevious>Back</button>
+                <button class="next btn" mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+
+
+        <mat-step>
+            <ng-template matStepLabel>Region related to the question</ng-template>
+
+            <div class="multiselect-box">
+                <div class="multiselect">
+                    <app-multiselect-chips *ngIf="countriesName.length > 0" [allInputData]="countriesName"
+                        (selectedData)="getSelectedCountries($event)" title="Countries"
+                        placeholder="Select Countries"></app-multiselect-chips>
+                </div>
+
+                <div class="multiselect">
+                    <app-multiselect-chips *ngIf="statesName.length > 0" [allInputData]="statesName"
+                        (selectedData)="getSelectedStates($event)" title="States"
+                        placeholder="Select States"></app-multiselect-chips>
+                </div>
+            </div>
+
+            <div class="buttons-div">
+                <button class="back btn" mat-button matStepperPrevious>Back</button>
+                <button class="next btn" mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+
+
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Event Date</ng-template>
+
+                <div class="option-div optionCD">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="eventDate" required>
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="buttons-div">
+                    <button class="back btn" mat-button matStepperPrevious>Back</button>
+                    <button class="next btn" (click)="getData()" mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div class="buttons-div">
+                <button class="back btn" mat-button matStepperPrevious>Back</button>
+                <button class="reset btn" mat-button (click)="stepper.reset()">Reset</button>
+                <button class="next btn" mat-button>Create</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
 </div>

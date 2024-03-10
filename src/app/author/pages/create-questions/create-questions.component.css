@@ -6,6 +6,13 @@
     justify-content: flex-start;
     padding: 2rem;
 }
+.mat-stepper-vertical, .mat-stepper-horizontal{
+    width: 100%;
+}
+::ng-deep .mat-vertical-content{
+    padding: 24px !important;
+}
+
 .input-question{
     width: 60%;
 }
@@ -15,8 +22,19 @@
     align-items: center;
     justify-content: space-between;
 }
+.multiselect-box{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.multiselect{
+    width: 100%;
+}
 .opt{
-    width: 45%;
+    width: 48%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -25,14 +43,113 @@
     width: 100%;
 }
 
+.options-btn{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem 0;
+}
+.mat-button-toggle-checked{
+    background-color: #F0D11C;
+}
 
-
-
-
-
+.buttons-div{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 0;
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 1.5rem;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.next{
+    background-color: #F0D11C;
+}
+.back{
+    background-color: transparent;
+    border: 1px solid #ccc;
+}
+.reset{
+    background-color: transparent;
+    border: 1px solid #ec6565;
+}
 
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 820px) {
+    .create-q-main-div{
+        padding: 1rem 0 3rem 0;
+    }
 
+    .input-question{
+        width: 100%;
+    }
+    .option-div{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .multiselect-box{
+        width: 100%;
+    }
+    .opt{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .input-option{
+        width: 100%;
+    }
+    
+    .options-btn{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 2rem 0;
+    }
+    .mat-button-toggle-checked{
+        background-color: #F0D11C;
+    }
+    
+    .buttons-div{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 1rem 0;
+    }
+    .btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 1.5rem;
+        border-radius: 50px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    .next{
+        background-color: #F0D11C;
+    }
+    .back{
+        background-color: transparent;
+        border: 1px solid #ccc;
+    }
+    .reset{
+        background-color: transparent;
+        border: 1px solid #ec6565;
+    }
 }

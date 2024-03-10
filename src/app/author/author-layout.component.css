@@ -45,7 +45,8 @@
         margin-left: 0;
         border-top: 1px solid #cccccc91;
         border-radius: 10px 10px 0 0;
-        background-color: #cccccc3b;
+        background-color: #f0d11c;
+        z-index: 1;
     }
 
     .author-right-part {
