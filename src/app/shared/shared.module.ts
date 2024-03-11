@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
+import { QuestionCardComponent } from './components/question-card/question-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     FeatureCardComponent,
     NavItemComponent,
-    MultiselectChipsComponent
+    MultiselectChipsComponent,
+    QuestionCardComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,7 @@ import { MatIconModule } from '@angular/material/icon';
     provideAuth(() => getAuth())
   ],
   exports: [
-    ButtonComponent, NavItemComponent, MultiselectChipsComponent
+    ButtonComponent, NavItemComponent, MultiselectChipsComponent, QuestionCardComponent
   ],
   providers: [
     AuthGuard

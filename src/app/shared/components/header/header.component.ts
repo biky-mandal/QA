@@ -18,8 +18,10 @@ export class HeaderComponent implements OnInit {
     '/author/dashboard',
     '/author/my-questions',
     '/author/create-question',
-    '/author/categories'
+    '/author/categories',
+    '/practice/questions'
   ]
+
   profileURL: any = '';
 
   constructor(

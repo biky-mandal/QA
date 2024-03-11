@@ -17,13 +17,14 @@
                     home
                 </span>
             </button>
-    
+
             <!-- Profile Header -->
             <span class="dashboard-title" *ngIf="router.url === '/profile'">Profile</span>
             <span class="dashboard-title" *ngIf="router.url === '/author/create-question'">Create Question</span>
             <span class="dashboard-title" *ngIf="router.url === '/author/my-questions'">My Questions</span>
             <span class="dashboard-title" *ngIf="router.url === '/author/dashboard'">Dashboard</span>
             <span class="dashboard-title" *ngIf="router.url === '/author/categories'">Categories</span>
+            <span class="dashboard-title" *ngIf="router.url === '/practice/questions'">Practice Session</span>
         </div>
 
     </div>
@@ -40,16 +41,20 @@
 
 
     <div class="h-r-div c-div">
-        <app-button *ngIf="!isLoggedIn" (onClick)="redirects('/login')" type="primary" color="" title="Login"></app-button>
+        <app-button *ngIf="!isLoggedIn" (onClick)="redirects('/login')" type="primary" color=""
+            title="Login"></app-button>
 
         <!-- <app-button *ngIf="isLoggedIn && !secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/profile')" type="primary" color="" title="Profile"></app-button> -->
-        
-        <div class="profile-div" *ngIf="isLoggedIn && !secondHeaderRoutes.includes(router.url)" (click)="redirects('/profile')">
-            <img class="photo" [src]="profileURL" alt="profile"/>
+
+        <div class="profile-div" *ngIf="isLoggedIn && !secondHeaderRoutes.includes(router.url)"
+            (click)="redirects('/profile')">
+            <img class="photo" [src]="profileURL" alt="profile" />
         </div>
 
-        <app-button *ngIf="isLoggedIn && secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/live')" type="secondary" color="warn" title="Live"></app-button>
+        <app-button *ngIf="isLoggedIn && secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/live')"
+            type="secondary" color="warn" title="Live"></app-button>
 
-        <app-button *ngIf="isLoggedIn && secondHeaderRoutes.includes(router.url)" (onClick)="redirects('/practice')"  type="primary" color="" title="Practice"></app-button>
+        <app-button *ngIf="isLoggedIn && secondHeaderRoutes.includes(router.url)"
+            (onClick)="redirects('/practice/questions')" type="primary" color="" title="Practice"></app-button>
     </div>
 </div>

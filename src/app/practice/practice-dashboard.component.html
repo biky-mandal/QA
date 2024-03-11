@@ -1,0 +1,45 @@
+<div class="practice-div">
+    <div class="practice-left-part">
+        <div class="nav-items">
+            <app-multiselect-chips *ngIf="categoriesName.length > 0" [allInputData]="categoriesName"
+                (selectedData)="getSelectedCategories($event)" title="Categories"
+                placeholder="Select Categories"></app-multiselect-chips>
+
+            <app-multiselect-chips *ngIf="subCategoriesName.length > 0" [allInputData]="subCategoriesName"
+                (selectedData)="getSelectedSubCategories($event)" title="Sub Categories"
+                placeholder="Select Sub Categories"></app-multiselect-chips>
+
+            <app-multiselect-chips *ngIf="countries.length > 0" [allInputData]="countries"
+                (selectedData)="getSelectedCountires($event)" title="Countries"
+                placeholder="Select Countries"></app-multiselect-chips>
+
+            <app-multiselect-chips *ngIf="states.length > 0" [allInputData]="states"
+                (selectedData)="getSelectedStates($event)" title="States"
+                placeholder="Select States"></app-multiselect-chips>
+
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Start date">
+                    <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+
+
+        </div>
+    </div>
+    <div class="practice-right-part">
+
+        <div class="prp-left">
+            <app-question-card></app-question-card>
+            <app-question-card></app-question-card>
+
+        </div>
+
+        <div class="prp-right">
+
+        </div>
+    </div>
+</div>
