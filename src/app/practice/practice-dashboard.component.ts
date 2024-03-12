@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { ICategory, ISubCategory } from '../shared/interfaces/Category';
 import { FormControl, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-practice-dashboard',
@@ -27,6 +28,9 @@ export class PracticeDashboardComponent {
   sStates: string[] = [];
 
   range!: FormGroup;
+  startDate: any;
+  endDate: any;
+  finalData: any[] = [];
 
 
   constructor(
@@ -83,14 +87,15 @@ export class PracticeDashboardComponent {
       })
     })
 
-    this.fetchQuestions();
+    if (this.sCategoriesName.length) this.fetchQuestions('CAT');
   }
 
 
 
   getSelectedSubCategories = (selectedSubCategories: string[]) => {
     this.sSubCategoriesName = selectedSubCategories;
-    this.fetchQuestions();
+
+    if (this.sSubCategoriesName.length) this.fetchQuestions('SCAT');
   }
 
 
@@ -109,44 +114,82 @@ export class PracticeDashboardComponent {
       })
     })
 
-    this.fetchQuestions();
+    if (this.sCountries.length) this.fetchQuestions('COUNTRY');
   }
 
 
   getSelectedStates = (selectedStates: string[]) => {
     this.sStates = selectedStates;
-    this.fetchQuestions();
+
+    if (this.sStates.length) this.fetchQuestions('STATE');
   }
 
-  generatePayload = () => {
-    let obj: any = {
-
-    }
-    return obj;
+  dateChangeHandler = () => {
+    this.startDate = moment(this.range.value['start']).utc().format();
+    this.endDate = moment(this.range.value['end']).utc().format();
   }
 
-  fetchQuestions = () => {
-    // let payload: any = this.generatePayload();
 
-    // console.log(payload);
+  fetchQuestions = (type: 'CAT' | 'SCAT' | 'COUNTRY' | 'STATE' | 'DATE') => {
 
     const questionCollectionRef = collection(this.firestore, 'questions');
-    const appQuery = query(questionCollectionRef,
-      where('categories', 'in', this.sCategoriesName),
-      where('subCategories', 'in', this.sSubCategoriesName),
-      where('countries', 'in', this.sCountries),
-      where('states', 'in', this.sStates),
-      where('eventDate', '>=', this.range.value.start),
-      where('eventDate', '<=', this.range.value.end),
-    );
 
-    this.getDataAcrToQuery(appQuery);
+    let query!: any;
 
+    switch (type) {
+      case 'CAT': {
+        query = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName));
+        break;
+      }
+      case 'SCAT':
+        query = query(questionCollectionRef, where('subSategories', 'array-contains-any', this.sSubCategoriesName));
+        break;
+      case 'COUNTRY':
+        query = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries));
+        break;
+      case 'STATE':
+        query = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates));
+        break;
+      default:
+        query = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate));
+        break;
+    }
+
+
+    this.getDataAcrToQuery(query);
+
+    this.filterData();
+  };
+
+  shallowEqualityCheck(obj1: any, obj2: any) {
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+    for (const key of keys1) {
+      if (obj1[key] !== obj2[key]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  filterData() {
     this.questions$.subscribe((d: any) => {
-      console.log(d);
+      d.map((data: any) => {
+        if (this.finalData.length) {
+          if (!this.finalData.some((existingData: any) => this.shallowEqualityCheck(existingData, data))) {
+            this.finalData.push(data);
+          }
+        } else {
+          this.finalData = [...data];
+        }
+      })
     })
 
-  };
+    console.log(this.finalData);
+  }
 
   getDataAcrToQuery = (query: any) => {
     this.questions$ = (collectionData(query)).pipe(
