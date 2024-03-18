@@ -2,11 +2,10 @@
     <div class="landing-div">
         <label class="text1 text">Be ready, be prepare</label>
         <label class="text2 text">For Every Student From Anywhere</label>
-        <label class="text3 text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.</label>
+        <label class="text3 text">Introducing our current affairs practice platform: Stay informed, Stay Ahead. Dive into the dynamic world of current events with our comprehensive practice platform designed to keep you abreast of the latest developments across the globe</label>
 
         <div class="landing-btn">
-            <app-button type="primary" color="" title="GO IN"></app-button>
+            <app-button type="primary" color="" (onClick)="redirects('/practice/questions')" title="GO IN"></app-button>
         </div>
     </div>
     <div class="landing-pg-content">
@@ -21,11 +20,11 @@
                 <img class="author-img" src="/assets/images/author.png" alt="author"/>
                 <div class="author-wrap-content">
                     <span class="text author-title">Want to be an author?</span>
-                    <label class="text author-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</label>
+                    <label class="text author-desc">Unleash your inner author with our platform, where aspiring writers can showcase their talents and craft compelling narratives.</label>
                 </div>
             </div>
             <div class="right-wrap">
-                <app-button type="primary" color="" title="Update"></app-button>
+                <app-button type="primary" color="" title="Update" (onClick)="redirects('/profile')"></app-button>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Firestore, collection, collectionData, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, limit, orderBy, query, startAfter, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable, filter, map } from 'rxjs';
 import { ICategory, ISubCategory } from '../shared/interfaces/Category';
@@ -15,6 +15,7 @@ export class PracticeDashboardComponent {
 
   WIN: Window = window;
   filterToggle: boolean = false;
+  latestDoc: any = null;
   position: 'SIDE' | 'BOTTOM' = 'SIDE';
   categoriesData$!: Observable<any>;
   countriesData$!: Observable<any>;
@@ -49,6 +50,7 @@ export class PracticeDashboardComponent {
     });
 
     this.getallFilterData();
+    this.getRandomQuestions();
 
     this.filterToggle = window.innerWidth <= 820 ? false : true;
     this.position = window.innerWidth <= 820 ? 'BOTTOM' : 'SIDE';
@@ -136,29 +138,36 @@ export class PracticeDashboardComponent {
     this.endDate = moment(this.range.value['end']).utc().format();
   }
 
+  getRandomQuestions = () => {
+    const questionCollectionRef = collection(this.firestore, 'questions');
+    const qry = query(questionCollectionRef, orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
+
+    this.getDataAcrToQuery(qry);
+    this.filterData();
+  }
+
 
   fetchQuestions = (type: 'CAT' | 'SCAT' | 'COUNTRY' | 'STATE' | 'DATE') => {
 
     const questionCollectionRef = collection(this.firestore, 'questions');
 
     let qry!: any;
-    console.log(this.sSubCategoriesName);
 
     switch (type) {
       case 'CAT':
-        qry = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName));
+        qry = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       case 'SCAT':
-        qry = query(questionCollectionRef, where('subCategories', 'array-contains-any', this.sSubCategoriesName));
+        qry = query(questionCollectionRef, where('subCategories', 'array-contains-any', this.sSubCategoriesName), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       case 'COUNTRY':
-        qry = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries));
+        qry = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       case 'STATE':
-        qry = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates));
+        qry = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       default:
-        qry = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate));
+        qry = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
     }
 
@@ -184,16 +193,16 @@ export class PracticeDashboardComponent {
 
   filterData() {
     this.questions$.subscribe((d: any) => {
-      console.log(d);
       let filteredData: any[] = [];
       d.map((data: any) => {
-        console.log(data);
         if (!this.finalData.some((existingData: any) => this.shallowEqualityCheck(existingData, data))) {
           filteredData.push(data);
         }
       })
-      this.finalData = [...filteredData];
-
+      if (filteredData.length) {
+        this.finalData = [...this.finalData, ...filteredData];
+      }
+      this.latestDoc = this.finalData[this.finalData.length - 1];
     })
 
   }
@@ -201,12 +210,17 @@ export class PracticeDashboardComponent {
   getDataAcrToQuery = (query: any) => {
     this.questions$ = (collectionData(query)).pipe(
       map((actions) => {
-        return actions.map((a) => {
-          const data = a as any;
+        return actions.map((data: any) => {
           return data;
         });
       })
     );
   }
 
+  handleScroll = (e: any) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom && this.finalData.length) {
+      this.getRandomQuestions()
+    }
+  }
 }

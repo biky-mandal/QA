@@ -41,9 +41,10 @@
 
         </div>
     </div>
-    <div class="practice-right-part">
+    <div class="practice-right-part" (scroll)="handleScroll($event)">
 
         <div class="prp-left">
+            <!-- <span *ngIf="!!!finalData.length">Use Any Filter</span> -->
             <ng-container *ngFor="let qData of finalData">
                 <app-question-card [question]="qData"></app-question-card>
             </ng-container>

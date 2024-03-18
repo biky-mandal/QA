@@ -17,7 +17,6 @@ export class QuestionCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.question);
     this.setupQuestion();
   }
 
@@ -38,8 +37,7 @@ export class QuestionCardComponent implements OnInit {
       this.getDataAcrToQuery(qry);
   
       this.answer$.subscribe((d: any) => {
-        console.log(d);
-        console.log(this.questionWithAnswer);
+
       })
     }
   }

@@ -14,7 +14,10 @@
     <div class="answer-description" *ngIf="questionWithAnswer?.ans?.key">
         <div class="option">
             <span class="option-desc">Correct Answer</span>
-            <span class="option-letter green">{{questionWithAnswer?.ans?.key}}</span>
+            <span class="option-letter green green-ans">{{questionWithAnswer?.ans?.key}}</span>
+            <ng-container *ngFor="let opt of questionWithAnswer.options">
+                <span class="option-desc green-lbl" *ngIf="opt.key === questionWithAnswer?.ans?.key">{{opt.value}}</span>
+            </ng-container>
         </div>
         <span class="option-desc">{{questionWithAnswer?.ans?.description}}</span>
     </div>
