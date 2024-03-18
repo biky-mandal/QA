@@ -1,25 +1,21 @@
 <div class="q-div">
     <div class="q-label-div">
-        <label class="q">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam natus repudiandae dolores
-            veritatis numquam. Exercitationem quod deserunt a error, eos fuga ipsum perspiciatis omnis,
-            obcaecati neque maxime, accusamus maiores!</label>
+        <label class="q">{{questionWithAnswer?.question}}</label>
     </div>
     <div class="options-label-div">
+        <ng-container *ngFor="let opt of questionWithAnswer?.options">
+            <div class="option" (click)="verifyAnswer(questionWithAnswer?.id, opt.key)">
+                <span [ngClass]="pressedAnswerKey === opt.key && pressedAnswerKey === questionWithAnswer?.ans?.key ? 'option-letter green' : pressedAnswerKey === opt.key && pressedAnswerKey != questionWithAnswer?.ans?.key ? 'option-letter red' : 'option-letter'">{{opt.key}}</span>
+                <span [ngClass]="pressedAnswerKey === opt.key && pressedAnswerKey === questionWithAnswer?.ans?.key ? 'option-desc green-lbl' : pressedAnswerKey === opt.key && pressedAnswerKey != questionWithAnswer?.ans?.key ? 'option-desc red-lbl' : 'option-desc'">{{opt.value}}</span>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="answer-description" *ngIf="questionWithAnswer?.ans?.key">
         <div class="option">
-            <span class="option-letter">A</span>
-            <span class="option-desc">Lorem ipsum dolor.</span>
+            <span class="option-desc">Correct Answer</span>
+            <span class="option-letter green">{{questionWithAnswer?.ans?.key}}</span>
         </div>
-        <div class="option">
-            <span class="option-letter">B</span>
-            <span class="option-desc">Lorem ipsum dolor.</span>
-        </div>
-        <div class="option">
-            <span class="option-letter">C</span>
-            <span class="option-desc">Lorem ipsum dolor.</span>
-        </div>
-        <div class="option">
-            <span class="option-letter">D</span>
-            <span class="option-desc">Lorem ipsum dolor.</span>
-        </div>
+        <span class="option-desc">{{questionWithAnswer?.ans?.description}}</span>
     </div>
 </div>

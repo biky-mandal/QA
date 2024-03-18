@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Firestore, collection, collectionData, query, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { ICategory, ISubCategory } from '../shared/interfaces/Category';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
@@ -13,6 +13,8 @@ import * as moment from 'moment';
 })
 export class PracticeDashboardComponent {
 
+  WIN: Window = window;
+  filterToggle: boolean = false;
   position: 'SIDE' | 'BOTTOM' = 'SIDE';
   categoriesData$!: Observable<any>;
   countriesData$!: Observable<any>;
@@ -48,7 +50,12 @@ export class PracticeDashboardComponent {
 
     this.getallFilterData();
 
+    this.filterToggle = window.innerWidth <= 820 ? false : true;
     this.position = window.innerWidth <= 820 ? 'BOTTOM' : 'SIDE';
+  }
+
+  toggleFilter = () => {
+    this.filterToggle = !this.filterToggle;
   }
 
   getallFilterData = () => {
@@ -134,34 +141,34 @@ export class PracticeDashboardComponent {
 
     const questionCollectionRef = collection(this.firestore, 'questions');
 
-    let query!: any;
+    let qry!: any;
+    console.log(this.sSubCategoriesName);
 
     switch (type) {
-      case 'CAT': {
-        query = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName));
+      case 'CAT':
+        qry = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName));
         break;
-      }
       case 'SCAT':
-        query = query(questionCollectionRef, where('subSategories', 'array-contains-any', this.sSubCategoriesName));
+        qry = query(questionCollectionRef, where('subCategories', 'array-contains-any', this.sSubCategoriesName));
         break;
       case 'COUNTRY':
-        query = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries));
+        qry = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries));
         break;
       case 'STATE':
-        query = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates));
+        qry = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates));
         break;
       default:
-        query = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate));
+        qry = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate));
         break;
     }
 
 
-    this.getDataAcrToQuery(query);
-
+    this.getDataAcrToQuery(qry);
     this.filterData();
   };
 
   shallowEqualityCheck(obj1: any, obj2: any) {
+
     const keys1 = Object.keys(obj1);
     const keys2 = Object.keys(obj2);
     if (keys1.length !== keys2.length) {
@@ -177,18 +184,18 @@ export class PracticeDashboardComponent {
 
   filterData() {
     this.questions$.subscribe((d: any) => {
+      console.log(d);
+      let filteredData: any[] = [];
       d.map((data: any) => {
-        if (this.finalData.length) {
-          if (!this.finalData.some((existingData: any) => this.shallowEqualityCheck(existingData, data))) {
-            this.finalData.push(data);
-          }
-        } else {
-          this.finalData = [...data];
+        console.log(data);
+        if (!this.finalData.some((existingData: any) => this.shallowEqualityCheck(existingData, data))) {
+          filteredData.push(data);
         }
       })
+      this.finalData = [...filteredData];
+
     })
 
-    console.log(this.finalData);
   }
 
   getDataAcrToQuery = (query: any) => {
@@ -196,7 +203,6 @@ export class PracticeDashboardComponent {
       map((actions) => {
         return actions.map((a) => {
           const data = a as any;
-          // const { id, name } = data;
           return data;
         });
       })
