@@ -155,19 +155,19 @@ export class PracticeDashboardComponent {
 
     switch (type) {
       case 'CAT':
-        qry = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
+        qry = query(questionCollectionRef, where('categories', 'array-contains-any', this.sCategoriesName), orderBy('createdOn', 'desc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       case 'SCAT':
-        qry = query(questionCollectionRef, where('subCategories', 'array-contains-any', this.sSubCategoriesName), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
+        qry = query(questionCollectionRef, where('subCategories', 'array-contains-any', this.sSubCategoriesName), orderBy('createdOn', 'desc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       case 'COUNTRY':
-        qry = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
+        qry = query(questionCollectionRef, where('countries', 'array-contains-any', this.sCountries), orderBy('createdOn', 'desc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       case 'STATE':
-        qry = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
+        qry = query(questionCollectionRef, where('states', 'array-contains-any', this.sStates), orderBy('createdOn', 'desc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
       default:
-        qry = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate), orderBy('createdOn', 'asc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
+        qry = query(questionCollectionRef, where('eventDate', '<=', this.endDate), where('eventDate', '>=', this.startDate), orderBy('createdOn', 'desc'), startAfter(this.latestDoc ? this.latestDoc.createdOn : this.latestDoc), limit(5));
         break;
     }
 
@@ -178,17 +178,22 @@ export class PracticeDashboardComponent {
 
   shallowEqualityCheck(obj1: any, obj2: any) {
 
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-    if (keys1.length !== keys2.length) {
-      return false;
-    }
-    for (const key of keys1) {
-      if (obj1[key] !== obj2[key]) {
-        return false;
-      }
-    }
-    return true;
+    // console.log(obj1);
+    // console.log(obj2);
+
+    // const keys1 = Object.keys(obj1);
+    // const keys2 = Object.keys(obj2);
+    // if (keys1.length !== keys2.length) {
+    //   return false;
+    // }
+    // for (const key of keys1) {
+    //   if (obj1[key] !== obj2[key]) {
+    //     return false;
+    //   }
+    // }
+    // return true;
+    if(obj1.id === obj2.id) return true;
+    else return false;
   }
 
   filterData() {
